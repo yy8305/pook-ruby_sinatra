@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>리뷰 관리자페이지   입니다.</p>
+<ul>
+<% @review.each do |x| %>
+  <li>
+    <%= x.title %>
+    <a href="/review_delete/<%= x.id %>">[x]</a>
+  </li>
+<% end %>
+</ul>
+<body>
+</html>

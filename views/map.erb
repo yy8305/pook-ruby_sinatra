@@ -1,0 +1,651 @@
+<!--<!DOCTYPE html> 
+<html> 
+<head> 
+ <meta charset="euc-kr"> 
+ <title>구글지도 회사 위치</title> 
+ <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script> 
+ <script> 
+  function initialize() { 
+  var myLatlng = new google.maps.LatLng(35.87110100714382, 128.60169690333006);
+  var mapOptions = { 
+        zoom: 17, 
+        center: myLatlng, 
+        mapTypeId: google.maps.MapTypeId.ROADMAP 
+  } 
+  var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions); 
+  var marker = new google.maps.Marker({ 
+            position: myLatlng, 
+            map: map, 
+            title: "대구시청" 
+});
+  var infowindow = new google.maps.InfoWindow( 
+          { 
+            content: "<p>대구시청</p>", 
+            maxWidth: 300 
+          } 
+); 
+
+google.maps.event.addListener(marker, 'click', function() { 
+ infowindow.open(map, marker); 
+}); 
+  } 
+ </script> 
+</head> 
+
+<body onload="initialize()"> 
+ <div id="map_canvas"style="width:500px; height:300px;"></div> 
+</body> 
+</html>  map 지도 1-->
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="euc-kr">
+
+<title>구글 지도 표시</title>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true">
+
+</script>
+
+<script>
+
+window.onload=function(){
+
+var mymap=document.getElementById("map");
+
+var latlng = [
+
+[36.983315, 127.940125,"다미족발"],
+
+[37.564289, 126.985029,"꼬꼬시티 명동점"],
+
+[37.570408,126.981899,"종각역 주변3"]
+
+];
+
+var gmap=new google.maps.Map(
+
+mymap,{zoom:16, left:new google.maps.LatLng(latlng[0][0], latlng[0][1]),center:new google.maps.LatLng(latlng[0][0], latlng[0][1]), mapTypeId:google.maps.MapTypeId.ROADMAP}
+
+);
+
+
+
+
+
+var marker, i;
+
+for (i = 0; i < latlng.length; i++) {
+
+marker=new google.maps.Marker({
+
+position:new google.maps.LatLng(latlng[i][0], latlng[i][1]),
+
+map:gmap, title:latlng[i][2]
+
+});
+
+
+
+
+
+
+}
+
+var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+var infowindow = new google.maps.InfoWindow( 
+          { 
+            content: "latlng[i][1]", 
+            maxWidth: 300 
+          } 
+); 
+
+google.maps.event.addListener(marker, 'click', function() { 
+ infowindow.open(map, marker); 
+}); 
+
+};
+
+</script>
+
+</head>
+
+<body>
+
+<div id="map" style="width:500px; height:400px;">
+
+</div>
+
+</body>
+
+</html>-->
+
+
+
+
+
+<!--
+<!DOCTYPE html> 
+
+ 
+
+ 
+
+<html> 
+
+ 
+
+ 
+
+<head> 
+
+ 
+
+ 
+
+<title>Google Maps</title> 
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> 
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" /> 
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script> 
+<script type="text/javascript" src="http://code.google.com/apis/gears/gears_init.js"></script> 
+
+
+ <script type="text/javascript"> 
+       function $(id) { 
+             return document.getElementById(id); 
+       } 
+
+       var contentArray = []; 
+       var iConArray = []; 
+       var markers = []; 
+       var trackerId = 0; 
+       var geocoder; 
+       var theUser = {}; 
+       var map = {}; 
+       var iterator = 0; 
+
+       contentArray[0] ='<strong>족발의 명수<strong><br/>';
+       contentArray[1] ='<strong>쉐프 에스빠냐<strong><br/>';
+       contentArray[2] ='<strong>면식가<strong><br/>';
+       contentArray[3] ='<strong>마시찜<strong><br/>';
+       contentArray[4] ='<strong>웃사브<strong><br/>';
+       contentArray[5] ='<strong>윤씨밀방<strong><br/>';
+       contentArray[6] ='<strong>파스타그라피<strong><br/>';
+       contentArray[7] ='<strong>허니보울<strong><br/>';
+       contentArray[8] ='<strong>천상 홍대점<strong><br/>';
+       contentArray[9] ='<strong>치킨인더키친<strong><br/>';
+
+       /*
+       iConArray[0] = "http://google-maps-icons.googlecode.com/files/walking-tour.png"; 
+       iConArray[1] = "http://google-maps-icons.googlecode.com/files/walking-tour.png"; 
+       iConArray[2] = "http://google-maps-icons.googlecode.com/files/walking-tour.png";
+       iConArray[3] = "http://google-maps-icons.googlecode.com/files/walking-tour.png";
+       iConArray[4] = "http://google-maps-icons.googlecode.com/files/walking-tour.png";
+       iConArray[5] = "http://google-maps-icons.googlecode.com/files/walking-tour.png";
+       iConArray[6] = "http://google-maps-icons.googlecode.com/files/walking-tour.png";
+       iConArray[7] = "http://google-maps-icons.googlecode.com/files/walking-tour.png";
+       iConArray[8] = "http://google-maps-icons.googlecode.com/files/walking-tour.png";
+       iConArray[9] = "http://google-maps-icons.googlecode.com/files/walking-tour.png";
+       iConArray[10] = "http://google-maps-icons.googlecode.com/files/walking-tour.png";  
+*/
+ 
+        var markerArray = [ 
+        new google.maps.LatLng(37.550035, 126.921431) ,
+        new google.maps.LatLng(37.550648, 126.918296) ,
+        new google.maps.LatLng(37.548884, 126.917414) ,
+        new google.maps.LatLng(37.548137, 126.920644) ,
+        new google.maps.LatLng(37.548967, 126.922441) ,
+        new google.maps.LatLng(37.549621, 126.922343) ,
+        new google.maps.LatLng(37.548844, 126.919891) ,
+        new google.maps.LatLng(37.548196, 126.919841) ,
+        new google.maps.LatLng(37.548466, 126.920187) ,
+        new google.maps.LatLng(37.555191, 126.929242) ,]; 
+
+
+       function initialize() { 
+             geocoder = new google.maps.Geocoder(); 
+             if (navigator.geolocation) { 
+                    var gps = navigator.geolocation; 
+                    gps.getCurrentPosition(function(pos) { 
+                           var latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude); 
+                           var opts = { 
+                                 zoom : 16,
+                                 center : latLng,                   
+                                 navigationControl : false,
+                                 mapTypeControl : false,
+                                 scaleControl : true,
+                                 mapTypeId : google.maps.MapTypeId.ROADMAP 
+                           }; 
+                           map = new google.maps.Map($("map_canvas"), opts); 
+                           viewMarker(); 
+                           showLocation(pos); 
+                           trackerId = gps.watchPosition(function(pos) { 
+                           var latLng = new google.maps.LatLng(pos.coords.latitude, 
+                                        pos.coords.longitude);
+                           map.setCenter(latLng); 
+                           theUser.setPosition(latLng); 
+                           showLocation(pos); 
+                           }); 
+                    }); 
+             } 
+       } 
+       function viewMarker() { 
+           for (var i = 0; i < markerArray.length; i++) { 
+               setTimeout(function() { 
+                   addMarker(); 
+               }, i * 300); 
+           } 
+       } 
+       function addMarker(){ 
+             var infowindow = new google.maps.InfoWindow({ 
+                    content : contentArray[iterator] 
+                    }); 
+             var marker = new google.maps.Marker({ 
+
+                    position : markerArray[iterator], 
+                    map : map,
+             }); 
+             markers.push(marker); 
+             google.maps.event.addListener(marker, 'click', function() { 
+                    infowindow.open(map, marker);     
+             });  
+             iterator++; 
+       } 
+       function showLocation(pos) { 
+             var latLng = new google.maps.LatLng(pos.coords.latitude, 
+                           pos.coords.longitude); 
+             if (geocoder) { 
+                    geocoder.geocode({ 
+                           'latLng' : latLng 
+                    }, function(results, status) { 
+                           if (status == google.maps.GeocoderStatus.OK) { 
+                                 if (results[1]) { 
+                                        $("location").innerHTML = results[1].formatted_address; 
+                                 } 
+                           } 
+                    }); 
+             } 
+       }
+
+</script>
+</head>
+
+
+<body style="margin: 0px; padding: 0px;" onLoad="initialize()"> 
+
+<br>
+<br>
+<br>
+<br>
+
+<center>
+ <div id="superbar">
+  <h2><span class="msg">현재위치: <span id="location"></span></span></h2>
+ </div>
+ <div id="map_canvas" style="width: 980px; height: 600px;border: 1px solid black;"></div>
+
+</center>
+
+</body> 
+</html>
+    현재위치 map          -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link type="text/css" rel="stylesheet" href="/main_2014.css" />
+
+<meta charset="euc-kr">
+
+<title>구글 지도 표시</title>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true">
+
+</script>
+
+<script>
+
+window.onload=function(){
+
+var mymap=document.getElementById("map");
+
+var latlng = [
+
+[37.550035, 126.921431,"족발의 명수"],
+[37.550648, 126.918296,"쉐프 에스빠냐"],
+[37.548884, 126.917414,"면식가"],
+[37.548137, 126.920644,"마시찜"],
+[37.548967, 126.922441,"웃사브"],
+[37.549621, 126.922343,"윤씨밀방"],
+[37.548844, 126.919891,"파스타그라피"],
+[37.548196, 126.919841,"허니보울"],
+[37.548466, 126.920187,"천상 홍대점"],
+[37.555191, 126.929242,"치킨인더키친"],
+
+];
+
+
+
+var gmap=new google.maps.Map(
+
+mymap,{zoom:16, left:new google.maps.LatLng(latlng[0][0], latlng[0][1]),center:new google.maps.LatLng(latlng[0][0], latlng[0][1]), mapTypeId:google.maps.MapTypeId.ROADMAP}
+
+);
+
+
+
+
+
+var marker, i;
+
+for (i = 0; i < latlng.length; i++) {
+
+marker=new google.maps.Marker({
+
+position:new google.maps.LatLng(latlng[i][0], latlng[i][1]),
+
+map:gmap, title:latlng[i][2]
+
+});
+
+
+
+
+
+
+}
+
+var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+var infowindow = new google.maps.InfoWindow( 
+          { 
+            content: "latlng[i][1]", 
+            maxWidth: 300 
+          } 
+); 
+
+google.maps.event.addListener(marker, 'click', function() { 
+ infowindow.open(map, marker); 
+}); 
+
+};
+
+</script>
+
+
+
+
+</head>
+<body>
+<script language="javascript" src="/jquery-latest.min.js"></script>
+
+
+
+<div id="header">
+
+    <!-- ie6 지원중단 201203 : Start -->
+      <div class="goodbyeie6 none" id="id_explorer6">
+    <img src="/image/main2011/ie6_img.gif" alt="ie6지원중단"/>
+    <p class="close" onclick="document.getElementById('id_explorer6').style.display='none';"><img src="/image/main2011/ie6_btn_x.gif" alt="닫기"/></p>
+    <p class="more">
+      <!-- link종료
+      ;'<a href="http://wtsc.kr/campaign.jsp" target="_blank"><img src="/IMAGE/Main2011/ie6_btn_more.gif" alt="자세히보기"/></a>
+      //-->
+    </p>
+    <script language="javascript">
+    <!--
+      var ie_version = (function() {
+        return (((a_match = navigator.appVersion.toUpperCase().match(/MSIE( \d+.\d+)/)) && (a_match.length > 1)) ? parseInt(a_match[1], 10) : -1);
+      })();
+      if (ie_version == 6) {
+        document.getElementById('id_explorer6').style.display = 'block';
+      }
+    //-->
+    </script>
+  </div>
+
+    <!-- //ie6 지원중단 201203 : End -->
+
+    <div class="topbg">
+      <div id="defaultHeader">
+        
+  <!-- global_top.inc { //-->
+  <div class="gnb">
+    <div class="gnb_tab floatL">
+      <ul>
+        <a href="/" target="_blank"><li class="gnb_tab00">pook</li></a>
+        <a href="http://www.menupan.com" target="_blank"><li class="gnb_tab01">메뉴판닷컴</li></a>
+        <a href="http://icoupon.menupan.com" target="_blank"><li class="gnb_tab02">아이쿠폰</li></a>
+        <a href="http://www.menupan.com/top1000/" target="_blank"><li class="gnb_tab03">전국맛집TOP1000</li></a>
+        <a href="http://www.menupan.com/premium/" target="_blank"><li class="gnb_tab04">프리미엄카드</li></a>
+        <a href="http://www.buyrus.co.kr/buyrus/buyrus_list.asp" target="_blank"><li class="gnb_tab05">바이러스</li></a>
+        <a href="http://www.menupan.com/Waple/First/First_main.asp" target="_blank"><li class="gnb_tab06">퍼스트</li></a>
+      </ul>
+    </div><!-- .gnb_tab -->
+    <div class="gnb_menu floatR">
+      <ul class="gnb_menu_ul">
+
+        <li class="gnb_menu01"><a href="/login">로그인</a></li>
+        <li class="gnb_menu02"><a href="/join">회원가입</a></li>
+      </ul>
+
+      <!-- 마이페이지 레이어팝업 -->
+      <ul class="gnb_menu_sub none" id="gnb_menu_sub" style="display:none;" onmouseenter="fn_gnb_menu_sub('on');" onmouseleave="fn_gnb_menu_sub('off');">
+        <li><a href="/mymenupan/mbr_grade/my_grade.asp"><span class="txt">씨앗</span><span class="red">0</span></a></li>
+        <li><a href="/mymenupan/mbr_grade/my_grade.asp"><span class="txt">과일상자</span><span class="red">0</span></a></a></li>
+        <li><a href="/restaurant/onlineservice/my_or_result.asp"><span class="txt">예약</span><span class="red">0건</span></a></a></li>
+        <li><a href="/event/2011/09_daybyday/main.asp"><span class="txt">출첵</span><span class="red">0일</span></a></a></li>
+      </ul>
+
+      <!-- 전체서비스 레이어팝업 -->
+      <div class="viewMenu none" id="tot_menumore" style="display:none;">
+        <span class="close" onclick="fn_disp_tot_menumore('off');"><img src="/common/nvimg/btn_vm_close.gif"></span>
+        <div class="vM_main">
+          <div class="Lyrest">
+            <p>전국맛집찾기</p>
+            <ul>
+              <li class="odd"><a href="/restaurant/" target="_blank">지역별맛집</a></li>
+              <li class="odd"><a href="/restaurant/onlineservice/" target="_blank">예약맛집</a></li>
+              <li class="odd"><a href="/restaurant/bestrest/" target="_blank">실시간인기맛집</a></li>
+              <li class="odd"><a href="/restaurant/goodrest/" target="_blank">추천맛집후기</a></li>
+              <li class="even"><a href="/restaurant/theme/" target="_blank">테마맛집</a></li>
+              <li class="even"><a href="/restaurant/restqna/" target="_blank">맛집Q&A</a></li>
+              <li class="even"><a href="/restaurant/coupon/" target="_blank">쿠폰맛집</a></li>
+            </ul>
+          </div>
+          <div class="Lyrecipe">
+            <p>메뉴판키친</p>
+            <ul>
+              <li><a href="/cook/recipe_search.asp" target="_blank">레시피찾기</a></li>
+              <li><a href="/cook/cooktheme/" target="_blank">테마요리</a></li>
+              <li><a href="/cook/CookBoard/CookBoard_List.asp" target="_blank">요리판</a></li>
+              <li><a href="/cook/cookmyknowhow/" target="_blank">나만의비법</a></li>
+              <li><a href="/cook/cookqna/" target="_blank">요리Q&A</a></li>
+            </ul>
+          </div>
+          <div class="Lywaple">
+            <p>매거진</p>
+            <ul>
+              <li><a href="/magazine/rest_column.asp" target="_blank">맛집탐방</a></dd>
+              <li><a href="/magazine/theme_column.asp" target="_blank">테마칼럼</a></li>
+              <li><a href="/cook/avsb/" target="_blank">상품비교</a></li>
+              <li><a href="/waple/photo/" target="_blank">포토존</a></li>
+              <li><a href="/waple/first/" target="_blank">퍼스트</a></li>
+            </ul>
+          </div>
+        </div><!-- .vM_main -->
+        <div class="vM_bottom">
+          <p><a href="/mymenupan/guide/guide.asp" target="_blank">고객센터</a><a href="/sitemap.asp" target="_blank">사이트맵</a></p>
+        </div><!-- .vM_bottom -->
+      </div><!-- .viewMenu -->
+    </div><!-- .gnb_menu -->
+  </div><!-- .gnb -->
+  <!-- global_top.inc } //-->
+<!-- m_top_search.inc { //-->
+
+    <div class="search_wrap">
+      <h1 class="h1logo"><a href="/"><img src="/images/h1logo.png" alt="menupan.com 매일매일 맛있게" style="width:300px;height:180px;position:absolute;top:20px;" ></a></h1>
+    </div><!-- .search_wrap -->
+  <form name="frm_m_top_sch_bg">
+    <input type="hidden" name="bg_link">
+  </form>
+  <script language="javascript">
+  <!--
+    function fn_m_top_sch_bg_clear() {
+      var o_frm = document.frm_m_top_search;
+      var o_frm_sch_bg = document.frm_m_top_sch_bg;
+      if (o_frm && o_frm_sch_bg) {
+        o_frm.kw.style.background = '#ffffff';
+        o_frm_sch_bg.bg_link.value = '';
+      }
+      return true;
+    }
+
+    function on_submit_m_top_search() {
+      var o_frm = document.frm_m_top_search;
+      var o_frm_sch_bg = document.frm_m_top_sch_bg;
+      if (o_frm && o_frm_sch_bg) {
+        o_frm.kw.value = o_frm.kw.value.replace(/(^\s+|\s+$)/g, '');    // trim
+        o_frm_sch_bg.bg_link.value = o_frm_sch_bg.bg_link.value.replace(/(^\s+|\s+$)/g, '');    // trim
+        var s_kw = o_frm.kw.value;
+        var s_bg_link = o_frm_sch_bg.bg_link.value;
+
+        if (s_kw.length == 0) {
+          if (s_bg_link.length > 0) {
+            ad_pub_act("P100414", "1004140001");
+            if (s_bg_link.indexOf('http://') == -1) { window.location.href = s_bg_link; }
+            else { window.open(s_bg_link); }
+          }
+          else { alert("검색어를 입력해 주십시요"); o_frm.kw.focus(); }
+        }
+        else {
+          o_frm.submit();
+        }
+      }
+      return false;
+    }
+  //-->
+  </script>
+  <!-- /common/inc/pubc_inc/main/searchtxt.ads :: [mcontentcare: c10a0047] :: 2014-10-24 오전 12:02:26 :: 211.53.210.38 :: mpadmin.menupan.com -->
+
+<!-- m_top_search.inc } //-->
+<!-- m_top_gnb.inc { -->
+  <script>
+    $(document).ready(function() {
+      //-- top lnb handler {
+      $('.cid_lnb_tab').bind({
+        'mouseenter': (function(p_evt) { $('.cid_lnb_tab_sub').hide(); $('.cid_lnb_tab_sub').eq($(this).parents('ul').find('li').index($(this))).show(); }),
+        'mouseleave': (function(p_evt) { $('.cid_lnb_tab_sub').hide(); })
+      });
+      $('.cid_lnb_tab_sub').bind({
+        'mouseenter': (function(p_evt) { $(this).show(); }),
+        'mouseleave': (function(p_evt) { $(this).hide(); })
+      });
+      $('#id_lnb_tab01').bind({
+        'click': (function(p_evt) { $(".lnb_tab01").attr('class','lnb_tab001'); }),
+        'mouseenter': (function(p_evt) { $(".lnb_tab01").attr('class','lnb_tab001'); }),
+        'mouseleave': (function(p_evt) { $(".lnb_tab001").attr('class','lnb_tab01'); })
+      });
+            $('#id_lnb_tab02').bind({
+        'click': (function(p_evt) { $(".lnb_tab02").attr('class','lnb_tab002'); }),
+        'mouseenter': (function(p_evt) { $(".lnb_tab02").attr('class','lnb_tab002'); }),
+        'mouseleave': (function(p_evt) { $(".lnb_tab002").attr('class','lnb_tab02'); })
+      });
+      $('#id_lnb_tab03').bind({
+        'click': (function(p_evt) { $(".lnb_tab03").attr('class','lnb_tab003'); }),
+        'mouseenter': (function(p_evt) { $(".lnb_tab03").attr('class','lnb_tab003'); }),
+        'mouseleave': (function(p_evt) { $(".lnb_tab003").attr('class','lnb_tab03'); })
+      });
+      $('#id_lnb_tab05').bind({
+        'click': (function(p_evt) { $(".lnb_tab05").attr('class','lnb_tab005'); }),
+        'mouseenter': (function(p_evt) { $(".lnb_tab05").attr('class','lnb_tab005'); }),
+        'mouseleave': (function(p_evt) { $(".lnb_tab005").attr('class','lnb_tab05'); })
+      });
+      $('#id_lnb_tab06').bind({
+        'click': (function(p_evt) { $(".lnb_tab06").attr('class','lnb_tab006'); }),
+        'mouseenter': (function(p_evt) { $(".lnb_tab06").attr('class','lnb_tab006'); }),
+        'mouseleave': (function(p_evt) { $(".lnb_tab006").attr('class','lnb_tab06'); })
+      });
+      $('#id_lnb_tab07').bind({
+        'click': (function(p_evt) { fn_disp_lnb_menuall(); }),
+        'mouseenter': (function(p_evt) { fn_disp_lnb_menuall(true); }),
+        'mouseleave': (function(p_evt) { fn_disp_lnb_menuall(false); })
+      });
+      $('#id_lnb_menuall').bind({
+        'mouseenter': (function(p_evt) { fn_disp_lnb_menuall(true); }),
+        'mouseleave': (function(p_evt) { fn_disp_lnb_menuall(false); })
+      });
+      //-- top lnb handler }
+    });
+
+
+  
+
+
+  </script>
+
+
+
+
+
+  <div class="lnb cid_lnb">
+    <ul>
+      <a href="/soge"><li class="lnb_tab01 cid_lnb_tab" id="id_lnb_tab01">소개</li></a>
+      <a href="/top10"><li class="lnb_tab02 cid_lnb_tab" id="id_lnb_tab02">맛집TOP10</li></a>
+      <a href="/review"><li class="lnb_tab03 cid_lnb_tab" id="id_lnb_tab03">맛집리뷰</li></a>
+      <a href="/map"><li class="lnb_tab004 cid_lnb_tab" id="id_lnb_tab04">맛지도</li></a>
+      <a href="/gsfood"><li class="lnb_tab05 cid_lnb_tab" id="id_lnb_tab05">편의점음식</li></a>
+      <a href="/write"><li class="lnb_tab06 cid_lnb_tab" id="id_lnb_tab06">글쓰기</li></a>
+      <% if session[:email].nil? %>
+      <a href="/login"><li class="lnb_tab07" id="id_lnb_tab07">로그인</li></a>
+      <% end %>
+      <% if !session[:email].nil? %>
+      <a href="/logout"><li class="lnb_tab07off" id="id_lnb_tab07">로그아웃</li></a>
+      <% end %>
+    </ul>
+
+
+  </div><!-- .lnb -->
+<!-- m_top_gnb.inc } -->
+
+      </div><!-- #defaultHeader -->
+    </div><!-- .topbg -->
+  </div><!-- #header -->
+  <!-- ==================== header 영역 : End ==================== -->
+
+
+
+  
+
+<br>
+<br>
+<br>
+<br>
+
+
+<body>
+
+<center>
+<img src="/images/map.png" alt="map">
+<h2>※추후 업데이트</h2>
+<div id="map" style="width:980px; height:500px;">
+</div>
+</center>
+
+</body>
+</html>

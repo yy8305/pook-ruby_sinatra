@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Twitter Bootstrap : Carousel Slide using Javascript </title>
+<link rel="stylesheet" href="/bootstrap.min.css">
+<link rel="stylesheet" href="/bootstrap-theme.min.css">
+<script src="/jquery.min.js"></script>
+<script src="/bootstrap.min.js"></script>
+</head>
+<script>
+$(document).ready(function(){
+    // Initiate
+    $("#demo-carousel").carousel();
+    
+    // Enable controls
+  $(".left").click(function(){
+      $("#demo-carousel").carousel('prev');
+    });
+    $(".right").click(function(){
+      $("#demo-carousel").carousel('next');
+    });
+    
+    
+    $(".frame-one").click(function(){
+      $("#demo-carousel").carousel(0);
+    });
+    $(".frame-two").click(function(){
+      $("#demo-carousel").carousel(1);
+    });
+    $(".frame-three").click(function(){
+      $("#demo-carousel").carousel(2);
+    });
+});
+</script>
+<style>
+  .demoBS2{margin:10px;width:980px;height:500px;}
+</style>
+<body>
+<center>
+<div class="demoBS2">
+    <div id="demo-carousel" class="carousel slide"
+  data-interval="4000" data-ride="carousel">  
+    <ol class="carousel-indicators">
+        <li  class="frame-one active"></li>
+        <li class="frame-two"></li>
+        <li class="frame-three"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="/images/aaa.png" 
+               alt="5 US dollar" style="width:980px;height:600px;">
+        </div>
+        <div class="item">
+          <img src="/images/bbb.jpg" 
+               alt="100 US Dollar" style="width:980px;height:600px;">
+        </div>
+        <div class="item">
+          <img src="/images/ccc.jpg" 
+              alt="50 US dollar" style="width:980px;height:600px;">
+        </div>
+      </div>
+   
+      <a class="left carousel-control" >
+        <span class="glyphicon glyphicon-chevron-left"><img src="/images/banner_left.svg" ></span>
+      </a>
+      <a class="right carousel-control">
+        <span class="glyphicon glyphicon-chevron-right"><img src="/images/banner_right.svg" ></span>
+      </a>
+    </div>
+  </div>
+  </center>
+</body>
+</html>

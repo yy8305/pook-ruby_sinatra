@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>편의점음식 관리자페이지   입니다.</p>
+<ul>
+<% @hotel.each do |x| %>
+  <li>
+    <%= x.title %>
+    <a href="/gsfood_delete/<%= x.id %>">[x]</a>
+  </li>
+<% end %>
+</ul>
+<body>
+</html>
